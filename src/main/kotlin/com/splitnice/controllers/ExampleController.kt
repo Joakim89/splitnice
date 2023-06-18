@@ -1,33 +1,19 @@
 package com.splitnice.controllers
 
-import io.micronaut.context.annotation.Value
+import com.splitnice.repositories.DBConnector
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import jakarta.inject.Inject
-import java.sql.Connection
-
-import java.sql.DriverManager
 
 @Controller("/example")
-class ExampleController @Inject constructor(
-        @Value("\${datasources.default.url}") url: String,
-        @Value("\${datasources.default.username}") username: String,
-        @Value("\${datasources.default.password}") password: String) {
-
-    private val connection: Connection
-
-    init {
-        connection = DriverManager.getConnection(url, username, password)
-    }
+class ExampleController @Inject constructor(private val dbConnector: DBConnector){
 
     @Get(uri = "/", produces = ["text/plain"])
     fun index(): String {
 
-        val query = connection.prepareStatement("SELECT * FROM somestuff")
+        val inputQuery = "SELECT * FROM somestuff"
 
-        val result = query.executeQuery()
-
-        result.next()
+        val result = dbConnector.getResultFromQuery(inputQuery)
 
         val data = result.getString("data")
 
