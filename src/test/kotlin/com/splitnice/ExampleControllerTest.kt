@@ -1,4 +1,4 @@
-package com.example
+package com.splitnice
 
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.client.HttpClient

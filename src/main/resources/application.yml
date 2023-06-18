@@ -18,7 +18,7 @@ datasources:
     db-type: mysql
 #jpa:
 #  default:
-#    packages-to-scan: "com.example"
+#    packages-to-scan: "com.splitnice"
 #    properties:
 #      hibernate:
 #        hbm2ddl:

@@ -1,4 +1,4 @@
-package com.example
+package com.splitnice
 
 import io.micronaut.context.annotation.Value
 import io.micronaut.http.annotation.Controller

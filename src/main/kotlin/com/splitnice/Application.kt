@@ -1,4 +1,4 @@
-package com.example
+package com.splitnice
 
 import io.micronaut.runtime.Micronaut.run
 import io.swagger.v3.oas.annotations.*
