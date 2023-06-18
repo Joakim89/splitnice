@@ -1,4 +1,4 @@
-package com.splitnice
+package com.splitnice.controllers
 
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.client.HttpClient
