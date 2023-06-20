@@ -11,7 +11,7 @@ micronaut:
         mapping: /swagger-ui/**
 datasources:
   default:
-    url: jdbc:mysql://localhost:3306/example
+    url: jdbc:mysql://localhost:3306/splitnice
     username: ${mysql_db_local_user}
     password: ${mysql_db_local_password}
     driver-class-name: com.mysql.cj.jdbc.Driver

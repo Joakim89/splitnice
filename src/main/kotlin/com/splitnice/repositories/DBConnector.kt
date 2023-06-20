@@ -19,7 +19,6 @@ class DBConnector @Inject constructor(
         connection = DriverManager.getConnection(url, username, password)
     }
 
-
     fun getResultFromQuery(inputQuery: String): ResultSet {
 
         val query = connection.prepareStatement(inputQuery)
