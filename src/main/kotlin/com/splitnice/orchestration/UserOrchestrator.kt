@@ -7,8 +7,8 @@ import jakarta.inject.Singleton
 
 @Singleton
 class UserOrchestrator @Inject constructor(private val userRepo: UserRepo) {
-    fun getUser(email: String): User {
-        val user = userRepo.getUser(email) //TODO: get user by email, instead of id
+    fun getUserByEmail(email: String): User {
+        val user = userRepo.getUserByEmail(email)
 
         return user
     }

@@ -6,7 +6,7 @@ import jakarta.inject.Singleton
 
 @Singleton
 class UserRepoImpl @Inject constructor(private val dbConnector: DBConnector) : UserRepo {
-    override fun getUser(email: String): User {
+    override fun getUserByEmail(email: String): User {
         val inputQuery = "SELECT id, name, email FROM users WHERE email = ${email};"
 
         val result = dbConnector.getResultFromQuery(inputQuery)

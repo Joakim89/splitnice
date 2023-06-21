@@ -11,9 +11,9 @@ import jakarta.inject.Inject
 class UserController @Inject constructor(private val userOrchestrator: UserOrchestrator){
 
     @Get(uri = "/{email}", produces = ["application/json"])
-    fun getUser(@PathVariable email: String): String {
+    fun getUserByEmail(@PathVariable email: String): String {
 
-        val user = userOrchestrator.getUser(email)
+        val user = userOrchestrator.getUserByEmail(email)
 
         val gson = Gson()
         return gson.toJson(user)
