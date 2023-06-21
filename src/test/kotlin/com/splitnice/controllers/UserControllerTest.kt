@@ -16,7 +16,7 @@ class UserControllerTest {
     lateinit var httpClient: HttpClient
 
     @Test
-    fun testIndex() {
+    fun testGet() {
         val response = httpClient.toBlocking().exchange("/1", String::class.java)
 
         assertEquals(HttpStatus.OK, response.status)

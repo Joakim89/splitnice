@@ -30,4 +30,11 @@ class DBConnector @Inject constructor(
         return result
 
     }
+
+    fun executeUpdateQuery(inputQuery: String) {
+        val query = connection.prepareStatement(inputQuery)
+
+        query.executeUpdate()
+
+    }
 }

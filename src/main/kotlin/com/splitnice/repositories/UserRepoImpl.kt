@@ -17,4 +17,11 @@ class UserRepoImpl @Inject constructor(private val dbConnector: DBConnector) : U
 
         return User(id, name, email)
     }
+
+    override fun createUser(user: User) {
+        val inputQuery = "INSERT INTO splitnice.users (name, email)\n" +
+                "VALUES ('${user.name}', '${user.email}');"
+
+        dbConnector.executeUpdateQuery(inputQuery)
+    }
 }

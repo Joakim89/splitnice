@@ -4,4 +4,6 @@ import com.splitnice.domain.User
 
 interface UserRepo {
     fun getUser(userId: Int): User
+
+    fun createUser(user: User)
 }
