@@ -10,10 +10,10 @@ import jakarta.inject.Inject
 @Controller("/user")
 class UserController @Inject constructor(private val userOrchestrator: UserOrchestrator){
 
-    @Get(uri = "/{id}", produces = ["application/json"])
-    fun getUser(@PathVariable id: Int): String {
+    @Get(uri = "/{email}", produces = ["application/json"])
+    fun getUser(@PathVariable email: String): String {
 
-        val user = userOrchestrator.getUser(id)
+        val user = userOrchestrator.getUser(email)
 
         val gson = Gson()
         return gson.toJson(user)

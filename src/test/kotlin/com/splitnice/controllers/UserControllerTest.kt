@@ -17,7 +17,8 @@ class UserControllerTest {
 
     @Test
     fun testGet() {
-        val response = httpClient.toBlocking().exchange("/1", String::class.java)
+        val email = "\"john@mail.com\""
+        val response = httpClient.toBlocking().exchange("email", String::class.java)
 
         assertEquals(HttpStatus.OK, response.status)
         assertEquals("{\"id\":1,\"name\":\"John\",\"email\":\"john@mail.com\"}", response.body())
