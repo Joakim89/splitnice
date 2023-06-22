@@ -20,7 +20,6 @@ class UserGroupOrchestrator @Inject constructor(private val userRepo: UserRepo, 
         )
 
         userGroupRepo.createUserGroup(userGroup)
-        //TODO: create repo method to create a user group from a domain object
     }
 
     private fun getUsersByIds(ids: List<Int>): List<User> {
