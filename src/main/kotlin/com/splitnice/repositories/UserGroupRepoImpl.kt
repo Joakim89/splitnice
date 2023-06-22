@@ -18,4 +18,18 @@ class UserGroupRepoImpl @Inject constructor(
             userRepo.updateGroupForUser(user.id, userGroupId)
         }
     }
+
+    override fun getUserGroup(groupId: Int): UserGroup {
+        val inputQuery = "SELECT * FROM user_groups WHERE id = ${groupId};"
+
+        val result = dbConnector.getResultFromQuery(inputQuery)
+
+        val id = result.getInt("id")
+        val name = result.getString("name")
+        val description = result.getString("description")
+
+
+
+        TODO("Not yet implemented")
+    }
 }

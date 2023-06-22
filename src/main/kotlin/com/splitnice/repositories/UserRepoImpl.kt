@@ -30,6 +30,16 @@ class UserRepoImpl @Inject constructor(private val dbConnector: DBConnector) : U
         return User(id, name, emailFromDb)
     }
 
+    override fun getUsersByGroup(groupId: Int): List<User> {
+        val inputQuery = "SELECT *\n" +
+                         "FROM splitnice.users\n" +
+                         "WHERE `group`=16;"
+
+        val result = dbConnector.getResultFromQuery(inputQuery)
+
+        TODO("not implemented")
+    }
+
     override fun createUser(user: User) {
         val inputQuery = "INSERT INTO splitnice.users (name, email)\n" +
                          "VALUES ('${user.name}', '${user.email}');"
