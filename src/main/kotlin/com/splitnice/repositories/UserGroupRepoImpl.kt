@@ -10,7 +10,7 @@ class UserGroupRepoImpl @Inject constructor(private val dbConnector: DBConnector
         val inputQuery = "INSERT INTO splitnice.user_groups (name, description)\n" +
                          "VALUES ('${userGroup.name}', '${userGroup.description}');"
 
-        val result = dbConnector.executeUpdateQuery(inputQuery)
+        val userGroupId = dbConnector.executeUpdateQuery(inputQuery)
 
         //TODO: update foreign keys in users table
     }

@@ -26,21 +26,23 @@ class DBConnector @Inject constructor(
 
         val result = query.executeQuery()
 
-        result.next()  //TODO: handle case when null, throw exception or wrap in option
+        result.next()
 
         return result
 
     }
 
-    fun executeUpdateQuery(inputQuery: String): ResultSet {
+    fun executeUpdateQuery(inputQuery: String): Int {
         val query = connection.prepareStatement(inputQuery, Statement.RETURN_GENERATED_KEYS)
 
         query.executeUpdate()
 
-        val generatedKeys = query.generatedKeys
+        val idQuery = connection.prepareStatement("SELECT LAST_INSERT_ID() AS id")
 
-        generatedKeys.next()  //TODO: handle case when null, throw exception or wrap in option
+        val idResult = idQuery.executeQuery()
+        idResult.next()
+        val id = idResult.getInt("id")
 
-        return generatedKeys
+        return id
     }
 }
