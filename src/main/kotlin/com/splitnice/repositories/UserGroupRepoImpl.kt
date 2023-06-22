@@ -5,13 +5,17 @@ import jakarta.inject.Inject
 import jakarta.inject.Singleton
 
 @Singleton
-class UserGroupRepoImpl @Inject constructor(private val dbConnector: DBConnector) : UserGroupRepo {
+class UserGroupRepoImpl @Inject constructor(
+    private val dbConnector: DBConnector,
+    private val userRepo: UserRepo) : UserGroupRepo {
     override fun createUserGroup(userGroup: UserGroup) {
         val inputQuery = "INSERT INTO splitnice.user_groups (name, description)\n" +
                          "VALUES ('${userGroup.name}', '${userGroup.description}');"
 
         val userGroupId = dbConnector.executeUpdateQuery(inputQuery)
 
-        //TODO: update foreign keys in users table
+        for (user in userGroup.users){
+            userRepo.updateGroupForUser(user.id, userGroupId)
+        }
     }
 }

@@ -39,8 +39,8 @@ class UserRepoImpl @Inject constructor(private val dbConnector: DBConnector) : U
 
     override fun updateGroupForUser(userId: Int, userGroupId: Int) {
         val inputQuery = "UPDATE splitnice.users t\n" +
-                         "SET t.`group` = ${userGroupId}\n" +
-                         "WHERE t.id = ${userGroupId};"
+                         "SET t.group = ${userGroupId}\n" +
+                         "WHERE t.id = ${userId};"
 
         dbConnector.executeUpdateQuery(inputQuery)
     }
