@@ -6,6 +6,7 @@ import jakarta.inject.Singleton
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.ResultSet
+import java.sql.Statement
 
 @Singleton
 class DBConnector @Inject constructor(
@@ -25,16 +26,21 @@ class DBConnector @Inject constructor(
 
         val result = query.executeQuery()
 
-        result.next()
+        result.next()  //TODO: handle case when null, throw exception or wrap in option
 
         return result
 
     }
 
-    fun executeUpdateQuery(inputQuery: String) {
-        val query = connection.prepareStatement(inputQuery)
+    fun executeUpdateQuery(inputQuery: String): ResultSet {
+        val query = connection.prepareStatement(inputQuery, Statement.RETURN_GENERATED_KEYS)
 
         query.executeUpdate()
 
+        val generatedKeys = query.generatedKeys
+
+        generatedKeys.next()  //TODO: handle case when null, throw exception or wrap in option
+
+        return generatedKeys
     }
 }
