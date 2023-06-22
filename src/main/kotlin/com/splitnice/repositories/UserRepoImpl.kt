@@ -32,7 +32,15 @@ class UserRepoImpl @Inject constructor(private val dbConnector: DBConnector) : U
 
     override fun createUser(user: User) {
         val inputQuery = "INSERT INTO splitnice.users (name, email)\n" +
-                "VALUES ('${user.name}', '${user.email}');"
+                         "VALUES ('${user.name}', '${user.email}');"
+
+        dbConnector.executeUpdateQuery(inputQuery)
+    }
+
+    override fun updateGroupForUser(userId: Int, userGroupId: Int) {
+        val inputQuery = "UPDATE splitnice.users t\n" +
+                         "SET t.`group` = ${userGroupId}\n" +
+                         "WHERE t.id = ${userGroupId};"
 
         dbConnector.executeUpdateQuery(inputQuery)
     }
