@@ -28,7 +28,7 @@ class UserGroupRepoImpl @Inject constructor(
         val name = result.getString("name")
         val description = result.getString("description")
 
-
+        val users = userRepo.getUsersByGroup(groupId)
 
         TODO("Not yet implemented")
     }

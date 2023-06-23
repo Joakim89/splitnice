@@ -3,6 +3,7 @@ package com.splitnice.repositories
 import com.splitnice.domain.User
 import jakarta.inject.Inject
 import jakarta.inject.Singleton
+import java.sql.ResultSet
 
 @Singleton
 class UserRepoImpl @Inject constructor(private val dbConnector: DBConnector) : UserRepo {
@@ -11,11 +12,7 @@ class UserRepoImpl @Inject constructor(private val dbConnector: DBConnector) : U
 
         val result = dbConnector.getResultFromQuery(inputQuery)
 
-        val id = result.getInt("id")
-        val name = result.getString("name")
-        val emailFromDb = result.getString("email")
-
-        return User(id, name, emailFromDb)
+        return getUserFromResult(result)
     }
 
     override fun getUserByEmail(email: String): User {
@@ -23,11 +20,7 @@ class UserRepoImpl @Inject constructor(private val dbConnector: DBConnector) : U
 
         val result = dbConnector.getResultFromQuery(inputQuery)
 
-        val id = result.getInt("id")
-        val name = result.getString("name")
-        val emailFromDb = result.getString("email")
-
-        return User(id, name, emailFromDb)
+        return getUserFromResult(result)
     }
 
     override fun getUsersByGroup(groupId: Int): List<User> {
@@ -37,7 +30,14 @@ class UserRepoImpl @Inject constructor(private val dbConnector: DBConnector) : U
 
         val result = dbConnector.getResultFromQuery(inputQuery)
 
-        TODO("not implemented")
+        val users = mutableListOf<User>()
+        users.add(getUserFromResult(result))
+
+        while (result.next()) {
+            users.add(getUserFromResult(result))
+        }
+
+        return users
     }
 
     override fun createUser(user: User) {
@@ -53,5 +53,13 @@ class UserRepoImpl @Inject constructor(private val dbConnector: DBConnector) : U
                          "WHERE t.id = ${userId};"
 
         dbConnector.executeUpdateQuery(inputQuery)
+    }
+
+    private fun getUserFromResult(result: ResultSet): User {
+        val id = result.getInt("id")
+        val name = result.getString("name")
+        val emailFromDb = result.getString("email")
+
+        return User(id, name, emailFromDb)
     }
 }
