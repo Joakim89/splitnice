@@ -7,7 +7,8 @@ import jakarta.inject.Singleton
 @Singleton
 class UserGroupRepoImpl @Inject constructor(
     private val dbConnector: DBConnector,
-    private val userRepo: UserRepo) : UserGroupRepo {
+    private val userRepo: UserRepo,
+    private val expenseRepo: ExpenseRepo) : UserGroupRepo {
     override fun createUserGroup(userGroup: UserGroup) {
         val inputQuery = "INSERT INTO splitnice.user_groups (name, description)\n" +
                          "VALUES ('${userGroup.name}', '${userGroup.description}');"
@@ -30,6 +31,8 @@ class UserGroupRepoImpl @Inject constructor(
 
         val users = userRepo.getUsersByGroup(groupId)
 
-        TODO("Not yet implemented")
+        val expenses = expenseRepo.getExpensesByGroup(groupId)
+
+        return UserGroup(id, name, description, users, expenses)
     }
 }

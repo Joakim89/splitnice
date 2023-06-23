@@ -21,6 +21,6 @@ class ExpenseOrchestrator @Inject constructor(private val expenseRepo: ExpenseRe
     fun getExpenseList(groupId: Int): List<Expense> {
         val userGroup = userGroupRepo.getUserGroup(groupId)
 
-        TODO("not yet implemented")
+        return userGroup.expenses
     }
 }
