@@ -26,7 +26,7 @@ class UserRepoImpl @Inject constructor(private val dbConnector: DBConnector) : U
     override fun getUsersByGroup(groupId: Int): List<User> {
         val inputQuery = "SELECT *\n" +
                          "FROM splitnice.users\n" +
-                         "WHERE `group`=16;"
+                         "WHERE `group`=${groupId};"
 
         val result = dbConnector.getResultFromQuery(inputQuery)
 
