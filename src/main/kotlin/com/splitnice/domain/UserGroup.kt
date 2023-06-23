@@ -8,7 +8,29 @@ data class UserGroup(
     val expenses: List<Expense>
 ) {
     fun calculateBalanceForUser(userId: Int): Float {
-        TODO("not yet implemented")
+        val totalExpensesSum = getTotalSumOfExpenses()
+        val amountPaidByUser = getSumOfExpensesPaidByUser(userId)
+        val dividedTotalSum = totalExpensesSum / users.count().toFloat()
+
+        return (dividedTotalSum - amountPaidByUser) * -1f
+    }
+
+    private fun getTotalSumOfExpenses(): Float {
+        var sum = 0f
+        for (expense in expenses) {
+            sum += expense.amount
+        }
+        return sum
+    }
+
+    private fun getSumOfExpensesPaidByUser(userId: Int): Float {
+        var sum = 0f
+        for (expense in expenses) {
+            if (expense.payerId == userId) {
+                sum += expense.amount
+            }
+        }
+        return sum
     }
 
 }
