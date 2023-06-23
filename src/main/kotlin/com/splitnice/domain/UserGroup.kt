@@ -6,4 +6,9 @@ data class UserGroup(
     val description: String,
     val users: List<User>,
     val expenses: List<Expense>
-)
+) {
+    fun calculateBalanceForUser(userId: Int): Float {
+        TODO("not yet implemented")
+    }
+
+}

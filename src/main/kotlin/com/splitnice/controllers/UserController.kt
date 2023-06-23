@@ -24,4 +24,13 @@ class UserController @Inject constructor(private val userOrchestrator: UserOrche
     fun createUser(@Body user: User){
         userOrchestrator.createUser(user)
     }
+
+    @Get(uri = "balance/{userId}", produces = ["application/json"])
+    fun getBalanceForUser(
+        @PathVariable userId: Int,
+        @QueryValue userGroupId: Int): Float {
+
+        return userOrchestrator.getBalanceForUser(userId, userGroupId)
+    }
+
 }
